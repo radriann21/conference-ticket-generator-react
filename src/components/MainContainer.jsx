@@ -3,7 +3,7 @@ import { Form } from "./Form";
 
 export const MainContainer = () => {
   return (
-    <section className="w-[520px] flex flex-col items-center gap-10 px-2 sm:px-0">
+    <section className="h-full w-[520px] flex flex-col items-center gap-10 px-2 sm:px-0 lg:py-10">
       <img src={logo} alt="Logo of coding conf" />
 
       <div className="text-center">
