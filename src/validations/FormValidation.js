@@ -1,7 +1,17 @@
-import * as Yup from 'yup';
+import * as Yup from "yup";
 
 export const FormValidation = Yup.object({
-  name: Yup.string().required("Name is required.").min(2, "Name must be at least 2 characters long."),
-  email: Yup.string().email("Invalid email format.").required("Email is required."),
-  github: Yup.string().required("GitHub username is required.").min(2, "GitHub username must be at least 2 characters long."),
-})
+  name: Yup.string().required("Name is required."),
+  email: Yup.string().email("Invalid email.").required("Email is required."),
+  github: Yup.string().required("GitHub username is required."),
+  avatar: Yup.mixed()
+    .test("required", "Avatar is required.", value => value && value.length > 0)
+    .test("fileSize", "File size exceeds 500KB.", value =>
+      !value || !value.length ? true : value[0].size <= 500 * 1024
+    )
+    .test("fileType", "Unsupported file format.", value =>
+      !value || !value.length
+        ? true
+        : ["image/jpeg", "image/png", "image/jpg"].includes(value[0].type)
+    ),
+});
